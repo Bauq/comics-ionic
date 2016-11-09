@@ -1,0 +1,23 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-dark">
+    <h1 class="title">{{comic.title}}</h1>
+    <button class="button button-clear button-primary" ng-click="selectmodal.hide()">Cerrar</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <div class="item item-divider">Detalle</div>
+      <label class="item item-text-wrap">
+        {{comic.description}}
+      </label>
+      <div class="item item-divider">Comentarios</div>
+      <ion-list>
+        <ion-item ng-repeat="comment in comic.comments">
+          {{comment.id}}<label> : </label>{{comment.comment}}
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="button-bar">
+      <a class="button button-dark icon" ng-click="updateComic()">Editar</a>
+    </div>
+  </ion-content>
+</ion-modal-view>

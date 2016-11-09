@@ -1,0 +1,24 @@
+/* Empty. Add your own CSS if you like */
+
+.even {
+  background-color: #FFFFFF;
+}
+.odd {
+  background-color: #e5e5e5;
+}
+
+#formlogin{
+  position: relative;
+  margin-top: 20%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#modal{
+  width: auto;
+  height: auto;
+}
+
+.div{
+  margin-top: 5px;
+}

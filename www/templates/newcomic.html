@@ -1,0 +1,32 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-dark">
+    <h1 class="title">Comic</h1>
+    <button class="button button-clear button-primary" ng-click="newmodal.hide()">Cerrar</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <div class="item div item-divider">Titulo</div>
+      <label class="item item-input">
+        <input type="text" ng-model="comic.title">
+      </label>
+      <div class="item div item-divider">Detalle</div>
+      <label class="item item-input">
+        <input type="text" ng-model="comic.description">
+      </label>
+      <div class="item div item-divider">Comentarios</div>
+      <ion-list>
+        <ion-item ng-repeat="c in comic.comments">
+          {{c.id}}<label> : </label>{{c.comment}}
+        </ion-item>
+      </ion-list>
+      <label class="item item-input">
+        <input type="text" ng-model="comic.comment.comment">
+      </label>
+      <button class="button ion-plus-circled" ng-click="addComment()">  Guardar comentario</button>
+    </div>
+    <div class="button-bar">
+      <a class="button button-stable icon ion-backspace-outline" ng-click="newmodal.hide()">Cancelar</a>
+      <a class="button button-dark icon" ng-click="saveComic()">Guardar</a>
+    </div>
+  </ion-content>
+</ion-modal-view>

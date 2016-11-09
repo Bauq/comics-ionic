@@ -1,0 +1,22 @@
+<ion-view view-title="Listado de comics">
+  <ion-nav-buttons side="right">
+    <label class="item item-input">
+      <input type="text" ng-model="findtext">
+    </label>
+    <button class="button button-icon button-clear ion-search" ng-click="findComic(findtext)">
+    </button>
+    <button class="button button-icon button-clear ion-plus-circled" ng-click="newModal()">
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+      <ion-list>
+        <ion-item ng-repeat="comic in comics | orderBy:'title'" ng-click="comicSelect(comic)">
+          <a class="item item-avatar item-wrap">
+            <label style="margin-top:-10px; margin-left:120px;">
+              <h2>{{comic.title}}</h2>
+            </label>
+          </a>
+        </ion-item>
+      </ion-list>
+  </ion-content>
+</ion-view>
