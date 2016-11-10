@@ -5,7 +5,11 @@ angular.module('starter.controllers', [])
     // Form data for the login modal
     $scope.loginData = {username: "", password: ""};
 
-    $scope.userData = {username: "", password: "", password2: ""};
+    $scope.userData = {
+      username: "",
+      password: "",
+      password2: ""
+    };
 
     $rootScope.users = [
       {username: "prueba1", password: "xxxx"},
@@ -22,8 +26,8 @@ angular.module('starter.controllers', [])
     $scope.doLogin = function () {
       console.log("Users", $scope.users);
       for (var i = 0; i < $scope.users.length; i++) {
-        if ($scope.loginData.username == $scope.users[i].username && $scope.loginData.password == $scope.users[i].password) {
-          $state.go('app.users');
+        if ($scope.loginData.username.toUpperCase() === $scope.users[i].username.toUpperCase() && $scope.loginData.password == $scope.users[i].password) {
+          $state.go('app.comics');
           $scope.loginData = {};
         }
       }
@@ -39,7 +43,7 @@ angular.module('starter.controllers', [])
 
   })
 
-  .controller('ComicsCtrl', function ($scope, $rootScope, $ionicModal) {
+  .controller('ComicsCtrl', function ($scope, $rootScope, $ionicModal, $state) {
     $rootScope.comics = [
       {
         title: "MARVEL UNIVERSE GUARDIANS OF THE GALAXY (2015) #14",
@@ -64,7 +68,7 @@ angular.module('starter.controllers', [])
       count: 0,
     };
 
-    $rootScope.findtext = ""
+    $rootScope.findtext = "";
 
     $ionicModal.fromTemplateUrl('templates/comicdetail.html', {
       scope: $scope
@@ -86,6 +90,7 @@ angular.module('starter.controllers', [])
     }
 
     $scope.newModal = function () {
+      $scope.editar = -1;
       $scope.comic.title = "";
       $scope.comic.description = "";
       $scope.comic.comments = [];
@@ -106,22 +111,42 @@ angular.module('starter.controllers', [])
 
     $scope.saveComic = function () {
       if ($scope.comic.title != "" && $scope.comic.description != "" && $scope.comic.comments.length != 0) {
-        $rootScope.comics.push($scope.comic);
+        if($scope.editar != -1) {
+          $rootScope.comics[$scope.editar] = $scope.comic;
+        }else{
+          $rootScope.comics.push($scope.comic);
+        }
         $scope.newmodal.hide();
+        $scope.comic = [];
       }
     }
 
     $scope.updateComic = function () {
+      $scope.findid($scope.comic.title);
       $scope.selectmodal.hide();
       $scope.newmodal.show();
     }
 
     $scope.findComic = function (text) {
+      var expresion = new RegExp(text.toUpperCase().trim());
+      console.log("Expresion" + expresion);
+      $rootScope.comicsfind = [];
       for (var i = 0; i < $rootScope.comics.length; i++) {
-        if ($rootScope.comics[i].title == text) {
-          $scope.comicSelect($rootScope.comics[i]);
+        if($rootScope.comics[i].title.toUpperCase().match(expresion) != null){
+          $rootScope.comicsfind.push($rootScope.comics[i]);
+        }
+      }
+      $state.go('app.comicsfind');
+      $rootScope.findtext = "";
+    }
+
+    $scope.findid = function (text) {
+      for (var i = 0; i < $rootScope.comics.length; i++) {
+        if ($rootScope.comics[i].title.toUpperCase() === text.toUpperCase()) {
+          $scope.editar = i;
           break;
         }
       }
     }
+
   })

@@ -56,7 +56,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             templateUrl: 'templates/comics.html'
           }
         }
-      });
+      })
+
+    .state('app.comicsfind', {
+      url: '/comicsfind',
+      views: {
+        'menuContent': {
+          controller: 'ComicsCtrl',
+          templateUrl: 'templates/comicsfind.html'
+        }
+      }
+    });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
   });

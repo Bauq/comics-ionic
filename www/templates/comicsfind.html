@@ -1,4 +1,4 @@
-<ion-view view-title="Listado de comics">
+<ion-view view-title="Resultados de busqueda">
   <ion-nav-buttons side="right">
     <label class="item item-input">
       <input type="text" placeholder="Busqueda por palabra" ng-model="findtext">
@@ -9,14 +9,14 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
-      <ion-list>
-        <ion-item ng-repeat="comic in comics | orderBy:'title'" ng-click="comicSelect(comic)">
-          <a class="item item-avatar item-wrap">
-            <label style="margin-top:-10px; margin-left:120px;">
-              <h2>{{comic.title}}</h2>
-            </label>
-          </a>
-        </ion-item>
-      </ion-list>
+    <ion-list>
+      <ion-item ng-repeat="comic in comicsfind | orderBy:'title'" ng-click="comicSelect(comic)">
+        <a class="item item-avatar item-wrap">
+          <label style="margin-top:-10px; margin-left:120px;">
+            <h2>{{comic.title}}</h2>
+          </label>
+        </a>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
